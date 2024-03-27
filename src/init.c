@@ -27,12 +27,13 @@ button_t *create_button(
 
     button->background = sfRectangleShape_create();
     button->text = sfText_create();
-    /*
-    Initialisation de la couleur, taille et position du bouton
-    */
-    /*
-    Initialisation de la font, texte, taille, couleur du texte
-    */
+    sfRectangleShape_setFillColor(button->background, color);
+    sfRectangleShape_setSize(button->background, size);
+    sfRectangleShape_setPosition(button->background, pos);
+    sfText_setString(button->text, text);
+    sfText_setFont(button->text, font);
+    sfText_setCharacterSize(button->text, 30);
+    sfText_setColor(button->text, sfWhite);
     sfText_setPosition(button->text, (sfVector2f){
         pos.x + size.x / 2,
         pos.y + size.y / 2
@@ -88,13 +89,14 @@ menu_t *init_menu(sfColor color, sfFont *font, const char *text)
     menu_t *menu = malloc(sizeof(menu_t));
 
     menu->background = sfRectangleShape_create();
-    /*
-    Initialisation de la couleur, taille et position du menu
-    */
+    sfRectangleShape_setFillColor(menu->background, color);
+    sfRectangleShape_setSize(menu->background, (sfVector2f){1920, 1080});
+    sfRectangleShape_setPosition(menu->background, (sfVector2f){0, 100});
     menu->text = sfText_create();
-    /*
-    Initialisation de la font, texte, taille, couleur du texte
-    */
+    sfText_setString(menu->text, text);
+    sfText_setFont(menu->text, font);
+    sfText_setCharacterSize(menu->text, 30);
+    sfText_setColor(menu->text, sfWhite);
     sfText_setPosition(menu->text, (sfVector2f){960, 540});
     sfText_setOrigin(menu->text, (sfVector2f){
         sfText_getLocalBounds(menu->text).width / 2,
@@ -128,6 +130,6 @@ game_t *init_game(void)
     game->fonts = init_fonts();
     game->navbar = init_navbar(game->fonts->arial);
     game->menus = init_menus(game->fonts->arial);
-    // Assignation du menu de départ
+    game->current_menu = MENU_1;
     return game;
 }

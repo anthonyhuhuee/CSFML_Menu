@@ -9,23 +9,34 @@
 
 void display_button(game_t *game, button_t *button)
 {
-    /*
-    Display du bouton
-    */
+    sfRenderWindow_drawRectangleShape(game->window, button->background, NULL);
+    sfRenderWindow_drawText(game->window, button->text, NULL);
 }
 
 void display_menu(game_t *game, menu_t *menu)
 {
-    /*
-    Display du bouton
-    */
+    sfRenderWindow_drawRectangleShape(game->window, menu->background, NULL);
+    sfRenderWindow_drawText(game->window, menu->text, NULL);
 }
 
 void display_menus(game_t *game, menus_t *menus)
 {
-    /*
-    Check du menu à display
-    */
+    switch (game->current_menu) {
+    case MENU_1:
+        display_menu(game, menus->menu_1);
+        break;
+    case MENU_2:
+        display_menu(game, menus->menu_2);
+        break;
+    case MENU_3:
+        display_menu(game, menus->menu_3);
+        break;
+    case MENU_4:
+        display_menu(game, menus->menu_4);
+        break;
+    default:
+        break;
+    }
 }
 
 void display_navbar(game_t *game, navbar_t *navbar)

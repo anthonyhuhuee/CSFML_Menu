@@ -9,16 +9,21 @@
 
 void handle_click_navbar(game_t *game)
 {
-    // sfVector2i mouse = ??
-    // sfVector2f coords = ??
-    // sfFloatRect menu_1 = ??
-    // sfFloatRect menu_2 = ??
-    // sfFloatRect menu_3 = ??
-    // sfFloatRect menu_4 = ??
+    sfVector2i mouse = sfMouse_getPositionRenderWindow(game->window);
+    sfVector2f coords = sfRenderWindow_mapPixelToCoords(game->window, mouse, NULL);
+    sfFloatRect menu_1 = sfRectangleShape_getGlobalBounds(game->navbar->button_1->background);
+    sfFloatRect menu_2 = sfRectangleShape_getGlobalBounds(game->navbar->button_2->background);
+    sfFloatRect menu_3 = sfRectangleShape_getGlobalBounds(game->navbar->button_3->background);
+    sfFloatRect menu_4 = sfRectangleShape_getGlobalBounds(game->navbar->button_4->background);
 
-    /*
-    Detection du clique de la souris sur les menus
-    */
+    if (sfFloatRect_contains(&menu_1, coords.x, coords.y))
+        game->current_menu = MENU_1;
+    else if (sfFloatRect_contains(&menu_2, coords.x, coords.y))
+        game->current_menu = MENU_2;
+    else if (sfFloatRect_contains(&menu_3, coords.x, coords.y))
+        game->current_menu = MENU_3;
+    else if (sfFloatRect_contains(&menu_4, coords.x, coords.y))
+        game->current_menu = MENU_4;
 }
 
 void handle_mouse_pressed_events(game_t *game)
